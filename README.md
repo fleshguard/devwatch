@@ -1,7 +1,7 @@
 # Device Watcher
 Robust notification script for device events
 
-![image](Github/08-07-25-0156AM_920062391.png)
+![image](Github/0.png)
 
 ## 🔗 Features
 * Block device notifications
