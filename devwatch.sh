@@ -28,11 +28,11 @@ block_device_watch_notification() {
 
       case "$line" in
           *"Added"*)
-              notify-send "💽 Device added" "<small>/dev/$dev</small>"
+              notify-send "💽 Device added" "/dev/$dev"
               echo "[+] Block device added: /dev/$dev"
               ;;
           *"Removed"*)
-              notify-send "🗄️ Device removed" "<small>/dev/$dev</small>"
+              notify-send "🗄️ Device removed" "/dev/$dev"
               echo "[-] Block device removed: /dev/$dev"
               ;;
           *"Properties Changed"*)
@@ -94,10 +94,10 @@ iface_watch_notification() {
     if [[ -z "$line" ]]; then
       if [[ "$ACTION" == "add" ]]; then
         echo "[+] Network interface added: $INTERFACE $(timer eval "$sound_cmd" /usr/share/sounds/ocean/stereo/dialog-information.oga)"
-        notify-send "🌐 Interface established" "<small>$INTERFACE</small>"
+        notify-send "🌐 Interface established" "$INTERFACE"
       elif [[ "$ACTION" == "remove" ]]; then
         echo "[-] Network interface removed: $INTERFACE $(timer eval "$sound_cmd" /usr/share/sounds/ocean/stereo/dialog-information.oga)"
-        notify-send "⛓️‍💥 Interface disbanded" "<small>$INTERFACE</small>"
+        notify-send "⛓️‍💥 Interface disbanded" "$INTERFACE"
       fi
       unset ACTION INTERFACE
     else
@@ -139,7 +139,7 @@ power_supply_watch_notification() {
           if [[ "$POWER_SUPPLY_CAPACITY" -le "$THRESHOLD" && "$NOTIFIED" == 0 ]]; then
             echo "[!] Power supply capacity: $POWER_SUPPLY_CAPACITY% $(timer eval "$sound_cmd" /usr/share/sounds/ocean/stereo/dialog-error-critical.oga)"
             notify-send -u critical "🪫 Battery critically low" \
-            "<small>$POWER_SUPPLY_CAPACITY% capacity. Plug in your device!</small>"
+            "$POWER_SUPPLY_CAPACITY% capacity. Plug in your device!"
             NOTIFIED=1
           elif [[ "$POWER_SUPPLY_CAPACITY" -ge "$RECOVERY" && "$NOTIFIED" == 1 ]]; then
             NOTIFIED=0
